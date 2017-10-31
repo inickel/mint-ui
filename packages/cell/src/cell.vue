@@ -103,13 +103,13 @@ export default {
       position: relative;
       text-decoration: none;
 
-      &:first-child {
+      &:first-of-type {
         .mint-cell-wrapper {
           background-origin: border-box;
         }
       }
 
-      &:last-child {
+      &:last-of-type {
         background-image: linear-gradient(0deg, $color-grey, $color-grey 50%, transparent 50%);
         background-size: 100% 1px;
         background-repeat: no-repeat;
