@@ -101,9 +101,10 @@
         if (!slot.divider) {
           slot.valueIndex = valueIndexCount++;
           values[slot.valueIndex] = (slot.values || [])[slot.defaultIndex || 0];
-          this.slotValueChange();
         }
       });
+      this.values = values;
+      this.slotValueChange();
     },
 
     methods: {
@@ -170,14 +171,23 @@
     },
 
     computed: {
-      values() {
-        var slots = this.slots || [];
-        var values = [];
-        slots.forEach(function(slot) {
-          if (!slot.divider) values.push(slot.value);
-        });
+      values: {
+        get() {
+          var slots = this.slots || [];
+          var values = [];
+          slots.forEach(function(slot) {
+            if (!slot.divider) values.push(slot.value);
+          });
 
-        return values;
+          return values;
+        },
+        set(values) {
+          var slots = this.slots || [];
+          var valueIndexCount = 0;
+          slots.forEach(function(slot) {
+            if (!slot.divider) slot.value = values[valueIndexCount++];
+          });
+        }
       },
       slotCount() {
         var slots = this.slots || [];
